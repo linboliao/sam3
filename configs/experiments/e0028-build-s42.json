@@ -1,0 +1,62 @@
+{
+  "study": "mlnm-dataset",
+  "experiment_id": "e0028",
+  "run_id": "build-s42",
+  "slug": "patient-disjoint-dataset-class9-exclusion",
+  "title": "MLNM 病人级隔离数据集（排除类别 9 图块）",
+  "question": "沿用既有患者级划分并排除两个含类别 9 的图块后，能否生成完整且可审计的数据集？",
+  "kind": "data",
+  "stage": "candidate",
+  "summary": "待构建与验证。",
+  "tags": [
+    "mlnm",
+    "dataset",
+    "patient-split",
+    "class9-exclusion"
+  ],
+  "parent_experiments": [
+    "e0026",
+    "e0027"
+  ],
+  "supersedes": [
+    "e0026"
+  ],
+  "task": "build_patient_disjoint_mlnm_dataset_with_approved_class9_exclusions",
+  "dataset": "MLNM e0025 cleaned masks using e0026 frozen patient assignments",
+  "model": "none; deterministic dataset construction",
+  "seed": 42,
+  "patch_size": 512,
+  "preprocessing": "Reuse frozen patient-level split; exclude two approved class-9 patches; hard-link payload.",
+  "parent_run": "mlnm-dataset/e0026/build-s42",
+  "split_manifest": "/NAS145/linboliao/Data/GlandSeg/MLNM/mlnm_seg_v1/splits.csv",
+  "excluded_item_ids": [
+    "patient_038677_slide_01__51009_18738",
+    "patient_038677_slide_01__52050_18738"
+  ],
+  "output_path": "{run_dir}/dataset",
+  "command": [
+    "/data12/jing/anaconda3/envs/sam/bin/python",
+    "scripts/p5_2/build_mlnm_dataset_from_split.py",
+    "--cleaning-csv",
+    "/NAS145/linboliao/Data/GlandSeg/cgspv2/runs/mlnm-label-clean/e0025/clean-s42/cleaning.csv",
+    "--split-csv",
+    "/NAS145/linboliao/Data/GlandSeg/MLNM/mlnm_seg_v1/splits.csv",
+    "--output-root",
+    "{run_dir}/dataset",
+    "--run-dir",
+    "{run_dir}",
+    "--exclude-item-id",
+    "patient_038677_slide_01__51009_18738",
+    "--exclude-item-id",
+    "patient_038677_slide_01__52050_18738"
+  ],
+  "expected_artifacts": [
+    "summary.json",
+    "dataset/manifest.csv",
+    "dataset/split.csv",
+    "dataset/class_map.json",
+    "dataset/exclusions.csv",
+    "dataset/validation.json"
+  ],
+  "workdir": "/NAS3/lbliao/Code-138/sam3"
+}
