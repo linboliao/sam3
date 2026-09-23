@@ -5,7 +5,7 @@ from collections import Counter
 from pathlib import Path
 import numpy as np
 from PIL import Image
-from p5_2.build_mlnm_dataset import LABELS,build,load_records,scan_patients,write_csv
+from build_mlnm_dataset import LABELS,build,load_records,scan_patients,write_csv
 
 def main():
  p=argparse.ArgumentParser()
